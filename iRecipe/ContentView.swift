@@ -18,8 +18,12 @@ struct ContentView: View {
                 }
             }
         } else {
-            GoodleSignInButton()
-                .navigationTitle("Sign In")
+            VStack {
+                Spacer()
+                GoodleSignInButton()
+                    .navigationTitle("Sign In")
+                    .offset(y: -20)
+            }
         }
     }
     
@@ -32,29 +36,11 @@ struct GoodleSignInButton: View {
             GIDSignIn.sharedInstance()?.signIn()
         }) {
         Text("Sign in with Google")
-            .padding()
+            .padding(EdgeInsets(top: 15, leading: 70, bottom: 15, trailing: 70))
             .background(Color.red)
             .cornerRadius(40)
             .foregroundColor(.white)
-            .padding(10)
-            .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.red, lineWidth: 1))
-        }
-    }
-    
-}
-
-struct GoodleSignOutButton: View {
-    
-    var body: some View {
-        Button(action: {
-            GIDSignIn.sharedInstance()?.signIn()
-        }) {
-        Text("Sign in with Google")
-            .padding()
-            .background(Color.red)
-            .cornerRadius(40)
-            .foregroundColor(.white)
-            .padding(10)
+            .padding(5)
             .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.red, lineWidth: 1))
         }
     }
