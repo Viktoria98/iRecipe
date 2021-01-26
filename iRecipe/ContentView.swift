@@ -1,21 +1,62 @@
-//
-//  ContentView.swift
-//  iRecipe
-//
-//  Created by Viktoria Kryvosheeva on 24.01.2021.
-//
-
 import SwiftUI
+import GoogleSignIn
 
 struct ContentView: View {
+    
+    @EnvironmentObject var googleDelegate: GoogleDelegate
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if googleDelegate.signedIn {
+            VStack {
+                Text(GIDSignIn.sharedInstance().currentUser.profile.name)
+                Text(GIDSignIn.sharedInstance().currentUser.profile.email)
+                Button(action: {
+                    GIDSignIn.sharedInstance().signOut()
+                    googleDelegate.signedIn = false
+                }) {
+                    Text("Sign Out")
+                }
+            }
+        } else {
+            GoodleSignInButton()
+                .navigationTitle("Sign In")
+        }
     }
+    
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+struct GoodleSignInButton: View {
+    
+    var body: some View {
+        Button(action: {
+            GIDSignIn.sharedInstance()?.signIn()
+        }) {
+        Text("Sign in with Google")
+            .padding()
+            .background(Color.red)
+            .cornerRadius(40)
+            .foregroundColor(.white)
+            .padding(10)
+            .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.red, lineWidth: 1))
+        }
     }
+    
+}
+
+struct GoodleSignOutButton: View {
+    
+    var body: some View {
+        Button(action: {
+            GIDSignIn.sharedInstance()?.signIn()
+        }) {
+        Text("Sign in with Google")
+            .padding()
+            .background(Color.red)
+            .cornerRadius(40)
+            .foregroundColor(.white)
+            .padding(10)
+            .overlay(RoundedRectangle(cornerRadius: 40).stroke(Color.red, lineWidth: 1))
+        }
+    }
+    
 }
