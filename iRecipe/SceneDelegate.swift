@@ -8,8 +8,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        let googleDelegate = (UIApplication.shared.delegate as! AppDelegate).googleDelegate
-        let contentView = ContentView().environmentObject(googleDelegate)
+        let authManager = (UIApplication.shared.delegate as! AppDelegate).authManager
+        let contentView = ContentView().environmentObject(authManager)
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)

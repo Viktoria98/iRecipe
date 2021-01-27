@@ -1,20 +1,16 @@
 import UIKit
 import CoreData
 import Firebase
-import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let googleDelegate = GoogleDelegate()
+    let authManager = AuthenticationManager()
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        FirebaseApp.configure()
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = googleDelegate
         return true
     }
     
@@ -23,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey : Any]
     ) -> Bool {
-      return GIDSignIn.sharedInstance().handle(url)
+        return authManager.handleUrl(url: url)
     }
 
     // MARK: - Core Data stack

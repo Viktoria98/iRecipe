@@ -3,16 +3,16 @@ import GoogleSignIn
 
 struct ContentView: View {
     
-    @EnvironmentObject var googleDelegate: GoogleDelegate
+    @EnvironmentObject var authManager: AuthenticationManager
     
     var body: some View {
-        if googleDelegate.signedIn {
+        if authManager.signedIn {
             VStack {
                 Text(GIDSignIn.sharedInstance().currentUser.profile.name)
                 Text(GIDSignIn.sharedInstance().currentUser.profile.email)
                 Button(action: {
                     GIDSignIn.sharedInstance().signOut()
-                    googleDelegate.signedIn = false
+                    authManager.signedIn = false
                 }) {
                     Text("Sign Out")
                 }
