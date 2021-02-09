@@ -1,26 +1,22 @@
 import SwiftUI
-import GoogleSignIn
 
 struct ContentView: View {
     
     @EnvironmentObject var authManager: AuthenticationManager
     
     var body: some View {
-        if authManager.signedIn {
-            VStack {
-                Text(GIDSignIn.sharedInstance().currentUser.profile.name)
-                Text(GIDSignIn.sharedInstance().currentUser.profile.email)
+        VStack {
+            if authManager.signedIn {
+                Text(authManager.currentUser()?.displayName ?? "")
+                Text(authManager.currentUser()?.email ?? "")
                 Button(action: {
-                    GIDSignIn.sharedInstance().signOut()
-                    authManager.signedIn = false
+                    authManager.signOut()
                 }) {
                     Text("Sign Out")
                 }
-            }
-        } else {
-            VStack {
+            } else {
                 Spacer()
-                GoodleSignInButton()
+                GoodleSignInButton(action: authManager.googleSignIn)
                     .navigationTitle("Sign In")
                     .offset(y: -20)
             }
@@ -31,9 +27,11 @@ struct ContentView: View {
 
 struct GoodleSignInButton: View {
     
+    let action: () -> Void
+    
     var body: some View {
         Button(action: {
-            GIDSignIn.sharedInstance()?.signIn()
+            action()
         }) {
         Text("Sign in with Google")
             .padding(EdgeInsets(top: 15, leading: 70, bottom: 15, trailing: 70))

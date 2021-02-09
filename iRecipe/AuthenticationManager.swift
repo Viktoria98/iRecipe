@@ -13,21 +13,54 @@ class AuthenticationManager: NSObject, GIDSignInDelegate, ObservableObject {
         GIDSignIn.sharedInstance().delegate = self
     }
     
+    func signIn() {
+        guard
+            let accessTokenObj = Token.loadToken(for: .accessToken),
+            let idTokenObj = Token.loadToken(for: .idToken)
+        else { return }
+        signedIn = true
+        
+        let credentials = GoogleAuthProvider.credential(
+            withIDToken: idTokenObj.token,
+            accessToken: accessTokenObj.token
+        )
+        firebaseSignIn(with: credentials)
+    }
+
     func handleUrl(url: URL) -> Bool {
         return GIDSignIn.sharedInstance().handle(url)
     }
     
-    func firebaseSignIn(with credentials: AuthCredential) {
-        Auth.auth().signIn(with: credentials) { (authResult, error) in
+    func currentUser() -> User? {
+        Auth.auth().currentUser
+    }
+    
+    func googleSignIn() {
+        GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    func signOut() {
+        firebaseSignOut()
+    }
+    
+}
+
+extension AuthenticationManager {
+    
+    private func firebaseSignIn(with credentials: AuthCredential) {
+        Auth.auth().signIn(with: credentials) { authResult, error in
             if let error = error {
                 print("firebaseSignIn", error)
+                self.signedIn = false
+            } else {
+                self.signedIn = true
             }
-            self.signedIn = true
         }
     }
     
-    func firebaseSignOut() {
+    private func firebaseSignOut() {
         do {
+            Token.deleteAllTokens()
             try Auth.auth().signOut()
             self.signedIn = false
         } catch let signOutError as NSError {
@@ -54,6 +87,8 @@ extension AuthenticationManager {
             withIDToken: authentication.idToken,
             accessToken: authentication.accessToken
         )
+        Token.saveToken(token: authentication.idToken, for: .idToken)
+        Token.saveToken(token: authentication.accessToken, for: .accessToken)
         firebaseSignIn(with: credentials)
     }
     

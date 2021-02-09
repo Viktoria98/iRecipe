@@ -5,9 +5,6 @@
       location = "group:iRecipe.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:GoogleService-Info.plist">
-   </FileRef>
-   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
