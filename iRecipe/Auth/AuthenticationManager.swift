@@ -39,6 +39,10 @@ class AuthenticationManager: NSObject, GIDSignInDelegate, ObservableObject {
         GIDSignIn.sharedInstance()?.signIn()
     }
     
+    func facbookSignIn() {
+        
+    }
+    
     func signOut() {
         firebaseSignOut()
     }

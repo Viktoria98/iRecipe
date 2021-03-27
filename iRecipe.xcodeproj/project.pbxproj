@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		342BBF7325C0C433007EC686 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342BBF7225C0C433007EC686 /* AuthenticationManager.swift */; };
+		343AB47E260FF293009D2C15 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343AB47D260FF293009D2C15 /* HomeView.swift */; };
+		343AB48C260FF3E7009D2C15 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343AB48B260FF3E7009D2C15 /* HomeViewModel.swift */; };
 		34510B0425D2DB0000734309 /* welcome-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 34510B0325D2DB0000734309 /* welcome-animation.json */; };
 		34510B0A25D2EBF600734309 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34510B0925D2EBF600734309 /* Color.swift */; };
 		3498F7FE25D2B4CE00A8ED14 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498F7FD25D2B4CE00A8ED14 /* KeyChainManager.swift */; };
@@ -49,6 +51,8 @@
 		225FBA5C93715F7F30E2EFB9 /* Pods-iRecipe-iRecipeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iRecipe-iRecipeUITests.debug.xcconfig"; path = "Target Support Files/Pods-iRecipe-iRecipeUITests/Pods-iRecipe-iRecipeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3429BF0A25BE2BF500847936 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		342BBF7225C0C433007EC686 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		343AB47D260FF293009D2C15 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		343AB48B260FF3E7009D2C15 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		34510B0325D2DB0000734309 /* welcome-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "welcome-animation.json"; sourceTree = "<group>"; };
 		34510B0925D2EBF600734309 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3498F7FD25D2B4CE00A8ED14 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
@@ -108,6 +112,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		343AB485260FF2EE009D2C15 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				343AB47D260FF293009D2C15 /* HomeView.swift */,
+				343AB48B260FF3E7009D2C15 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		343AB486260FF34E009D2C15 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		343AB487260FF369009D2C15 /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				3498F80525D2BB9600A8ED14 /* Token.swift */,
+				3498F7FD25D2B4CE00A8ED14 /* KeyChainManager.swift */,
+			);
+			path = LocalStorage;
+			sourceTree = "<group>";
+		};
 		34510B0825D2EBB600734309 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,9 +148,8 @@
 		348C441925D2D4FC0035CF13 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				34D2485925BE1C8900508D9E /* ContentView.swift */,
 				342BBF7225C0C433007EC686 /* AuthenticationManager.swift */,
-				3498F80525D2BB9600A8ED14 /* Token.swift */,
-				3498F7FD25D2B4CE00A8ED14 /* KeyChainManager.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -160,7 +188,9 @@
 		34D2485425BE1C8900508D9E /* iRecipe */ = {
 			isa = PBXGroup;
 			children = (
-				34D2485925BE1C8900508D9E /* ContentView.swift */,
+				343AB487260FF369009D2C15 /* LocalStorage */,
+				343AB486260FF34E009D2C15 /* Network */,
+				343AB485260FF2EE009D2C15 /* Home */,
 				348C441925D2D4FC0035CF13 /* Auth */,
 				34BE149325D2D4560060D489 /* Lottie */,
 				34510B0825D2EBB600734309 /* Extensions */,
@@ -503,8 +533,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				34D2485625BE1C8900508D9E /* AppDelegate.swift in Sources */,
+				343AB48C260FF3E7009D2C15 /* HomeViewModel.swift in Sources */,
 				3498F80625D2BB9600A8ED14 /* Token.swift in Sources */,
 				3498F7FE25D2B4CE00A8ED14 /* KeyChainManager.swift in Sources */,
+				343AB47E260FF293009D2C15 /* HomeView.swift in Sources */,
 				34D2485D25BE1C8900508D9E /* iRecipe.xcdatamodeld in Sources */,
 				342BBF7325C0C433007EC686 /* AuthenticationManager.swift in Sources */,
 				34D2485825BE1C8900508D9E /* SceneDelegate.swift in Sources */,

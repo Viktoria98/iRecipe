@@ -7,6 +7,7 @@ target 'iRecipe' do
   pod 'GoogleSignIn'
   pod 'Firebase/Firestore'
   pod 'lottie-ios'
+  pod 'Firebase/Auth'
 
   target 'iRecipeTests' do
     inherit! :search_paths
